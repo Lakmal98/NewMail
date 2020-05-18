@@ -53,7 +53,7 @@ class Gmail {
   $i=0;  
         foreach ($messages as $message) {
             $this->getMessage($service, $userId, $message->getId());
-        if($i==1){
+        if($i==15){
         break;
         } else {
             $i++;
@@ -93,13 +93,13 @@ class Gmail {
 
           $filterLabels = array("UNREAD", "INBOX");//Filter this labels
         //   $fiterIncludes = array("UGVLE", "IS21", "assignment")
-          $snippet = substr($message->snippet, 0, 115) . " ..."; //Take first 115 Characters to SMS
+          $snippet = substr($message->snippet, 0, 154) . " ..."; //Take first 154 Characters to SMS
           $labels = $message->labelIds;
         //   if(in_array($filterLabels[0], $labels) && in_array($filterLabels[1], $labels)) {
             if(in_array($filterLabels[1], $labels)) {
                 if (preg_match('[UGVLE|IS21]', $snippet )) {
                    $messageId = $message->id;
-                   $this->sendSMS($snippet);
+                //    $this->sendSMS($snippet);//
                 }
           }
         //   echo($message->snippet);
