@@ -27,5 +27,5 @@ class NewMail {
 $newMail = new NewMail();
 
 echo "<!Doctype html><html>";
-echo $yoyo->go();
+echo $newMail->go();
 echo "</html>";
