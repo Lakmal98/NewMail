@@ -48,10 +48,15 @@ class Gmail {
             print 'An error occurred: ' . $e->getMessage();
         }
         } while ($pageToken);
-    
+  $i=0;  
         foreach ($messages as $message) {
             $this->getMessage($service, $userId, $message->getId());
+        if($i==15){
         break;
+        } else {
+            $i++;
+        }
+        
         }
     
         return $messages;
