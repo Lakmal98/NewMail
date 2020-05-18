@@ -1,7 +1,13 @@
 <?php
 
 class Gmail {
-    
+    public function __construct() {
+
+    }
+
+    public function readLabels() {
+        
+    }
 }
 
 
