@@ -6,7 +6,7 @@ class Gmail {
     }
 
     public function readLabels() {
-        $service = new Google_Service_Gmail($this->$client);
+        $service = new Google_Service_Gmail($this->client);
 
         // Print the labels in the user's account.
         $user = 'me';
