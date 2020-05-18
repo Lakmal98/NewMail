@@ -61,7 +61,7 @@ class Gmail {
         
         }
     
-        return $messages;
+        // return $messages;
     }
 
     function getMessage($service, $userId, $messageId) {
@@ -79,7 +79,7 @@ class Gmail {
                 }
           }
         //   echo($message->snippet);
-          return $message;
+        //   return $message;
         } catch (Exception $e) {
           print 'An error occurred: ' . $e->getMessage();
         }
