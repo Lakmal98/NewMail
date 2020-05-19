@@ -31,6 +31,12 @@ class Connection {
         }
     }
 
+    private function storeToken($token) {
+        $email="lakmlaepp@gmail.com";//Replace Your mail. ###only for this now###
+        $sql = "INSERT INTO usertoken (email, token) VALUES ('{$email}', '{$token}');";
+
+    }
+
     public function create_client() {
             $client = new Google_Client();
             $client->setApplicationName('Gmail API PHP Quickstart');
