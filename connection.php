@@ -31,10 +31,26 @@ class Connection {
         }
     }
 
-    private function storeToken($token) {
+    private function storeToken($param) {
+        $token = json_encode($param);
         $email="lakmlaepp@gmail.com";//Replace Your mail. ###only for this now###
         $sql = "INSERT INTO usertoken (email, token) VALUES ('{$email}', '{$token}');";
+        require_once("db.php");
+        $result = $dbConn->query($sql);
+        $dbConn->close();
+        if(!$result) {
+            return "{message: 'Authorize app to continue', err:'Failed to add token to the database.'}";
+        }
+        return NULL;
+    }
 
+    private function getStoredToken() {
+        $email="lakmlaepp@gmail.com";//Replace Your mail. ###only for this now###
+        $sql = "SELECT token FROM usertoken WHERE email = '{$email}';";
+        require_once("db.php");
+        $result = $dbConn->query($sql)->fetch_assoc();
+        $dbConn->close();
+        return $result['token'];
     }
 
     public function create_client() {
@@ -49,9 +65,8 @@ class Connection {
             // The file token.json stores the user's access and refresh tokens, and is
             // created automatically when the authorization flow completes for the first
             // time.
-            $tokenPath = 'token.json';
-            if (file_exists($tokenPath)) {
-                $accessToken = json_decode(file_get_contents($tokenPath), true);
+            $accessToken = $this->getStoredToken();//Take stored token
+            if ($accessToken != NULL) {
                 $client->setAccessToken($accessToken);
             }
 
@@ -82,7 +97,10 @@ class Connection {
                 if (!file_exists(dirname($tokenPath))) {
                     mkdir(dirname($tokenPath), 0700, true);
                 }
-                file_put_contents($tokenPath, json_encode($client->getAccessToken()));
+                $result = $this->storeToken($client->getAccessToken());
+                if($result !== NULL) {
+                    echo $result;
+                }
         } else {
             echo "<p> Not expired </p>";
         }

@@ -95,10 +95,10 @@ class Gmail {
         //   $fiterIncludes = array("UGVLE", "IS21", "assignment")
           $snippet = substr($message->snippet, 0, 154) . " ..."; //Take first 154 Characters to SMS
           $labels = $message->labelIds;
-        //   if(in_array($filterLabels[0], $labels) && in_array($filterLabels[1], $labels)) {
-            if(in_array($filterLabels[1], $labels)) {
+          if(in_array($filterLabels[0], $labels) && in_array($filterLabels[1], $labels)) {
+            // if(in_array($filterLabels[1], $labels)) {
                 if (preg_match('[UGVLE|IS21]', $snippet )) {
-                   $messageId = $message->id;
+                   echo $messageId = $message->id;
                 //    $this->sendSMS($snippet);//
                 }
           }
