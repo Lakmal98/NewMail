@@ -16,7 +16,7 @@ class NewMail {
         if($conn->is_connected()){
             require_once('gmail.php');
             $gmail = new Gmail($conn->get_client());
-            return $gmail->listMessages(); 
+            return print_r($gmail->listMessages()); 
         } else {
             return $conn->get_unauthenticated_data();
         }

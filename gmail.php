@@ -64,6 +64,12 @@ class Gmail {
         // return $messages;
     }
 
+    private function storeSmsInDatabase($data) {
+        $sql = "INSERT INTO messagelist (`messageId`, `message`) VALUES ('{$data[0]}','{$data[1]}');";
+        require('db.php');
+        $dbConn->query($sql);
+    }
+
     private function sendSMS($message) {
         $user = "94775277373";
         $password = "1215";
@@ -98,8 +104,7 @@ class Gmail {
           if(in_array($filterLabels[0], $labels) && in_array($filterLabels[1], $labels)) {
             // if(in_array($filterLabels[1], $labels)) {
                 if (preg_match('[UGVLE|IS21]', $snippet )) {
-                    $data = array($message->id, $this->$snippet);
-                    return $data;
+                    $this->storeSmsInDatabase(array($message->id,$snippet));
                 }
           }
         //   echo($message->snippet);
