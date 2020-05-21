@@ -98,8 +98,8 @@ class Gmail {
           if(in_array($filterLabels[0], $labels) && in_array($filterLabels[1], $labels)) {
             // if(in_array($filterLabels[1], $labels)) {
                 if (preg_match('[UGVLE|IS21]', $snippet )) {
-                   echo $messageId = $message->id;
-                //    $this->sendSMS($snippet);//
+                    $data = array($message->id, $this->$snippet);
+                    return $data;
                 }
           }
         //   echo($message->snippet);
