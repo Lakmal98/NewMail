@@ -35,7 +35,7 @@ class Connection {
         $token = json_encode($param);
         $email="lakmlaepp@gmail.com";//Replace Your mail. ###only for this now###
         $sql = "INSERT INTO usertoken (email, token) VALUES ('{$email}', '{$token}');";
-        require_once("db.php");
+        require("db.php");
         $result = $dbConn->query($sql);
         $dbConn->close();
         if(!$result) {
@@ -47,7 +47,7 @@ class Connection {
     private function getStoredToken() {
         $email="lakmlaepp@gmail.com";//Replace Your mail. ###only for this now###
         $sql = "SELECT token FROM usertoken WHERE email = '{$email}';";
-        require_once("db.php");
+        require("db.php");
         $result = $dbConn->query($sql)->fetch_assoc();
         $dbConn->close();
         return $result['token'];
@@ -93,10 +93,10 @@ class Connection {
                     return $client;
                 }
 
-                // Save the token to a file.
-                if (!file_exists(dirname($tokenPath))) {
-                    mkdir(dirname($tokenPath), 0700, true);
-                }
+                // // Save the token to a file.
+                // if (!file_exists(dirname($tokenPath))) {
+                //     // mkdir(dirname($tokenPath), 0700, true);
+                // }
                 $result = $this->storeToken($client->getAccessToken());
                 if($result !== NULL) {
                     echo $result;

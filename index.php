@@ -1,6 +1,5 @@
 <?php
 
-
 class NewMail {
     public function __construct() {
         $this->include();
